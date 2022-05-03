@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apis_api_documentation_path": {
+            "value": null
+        },
+        "subscriptions_***SUB***_displayName": {
+            "value": null
+        },
+        "subscriptions_***SUB2***_displayName": {
+            "value": null
+        },
+        "users_1_lastName": {
+            "value": null
+        },
+        "service_shewrites_apim_name": {
+            "value": null
+        }
+    }
+}

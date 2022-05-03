@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apis_api_documentation_path": {
+            "value": null
+        },
+        "subscriptions_***SUB_ID***_displayName": {
+            "value": null
+        },
+        "subscriptions_***SUB_ID2***_displayName": {
+            "value": null
+        },
+        "users_1_lastName": {
+            "value": null
+        },
+        "subscriptions_***SUB_ID3***_displayName": {
+            "value": null
+        },
+        "subscriptions_***SUB_ID4***_displayName": {
+            "value": null
+        },
+        "users_1_lastName_1": {
+            "value": null
+        },
+        "sites_shewrites_backend_name": {
+            "value": null
+        },
+        "sites_shewrites_js_func_app_name": {
+            "value": null
+        },
+        "sites_shewrites_front_windows_name": {
+            "value": null
+        },
+        "vaults_shewrites_keyvault_name": {
+            "value": null
+        },
+        "serverfarms_ASP_shewrites_9543_name": {
+            "value": null
+        },
+        "serverfarms_ASP_shewrites_a5f4_name": {
+            "value": null
+        },
+        "service_shewrites_apim_name": {
+            "value": null
+        },
+        "service_shewrites_apim2_name": {
+            "value": null
+        },
+        "components_shewrites_func_app_name": {
+            "value": null
+        },
+        "storageAccounts_***STORAGE_ACCOUNT***_name": {
+            "value": null
+        },
+        "flexibleServers_shewrites_db_name": {
+            "value": null
+        },
+        "components_shewrites_js_func_app202205021314_name": {
+            "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___shewrites_func_app_name": {
+            "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___shewrites_js_func_app202205021314_name": {
+            "value": null
+        },
+        "actiongroups_application_insights_smart_detection_externalid": {
+            "value": null
+        },
+        "workspaces_defaultworkspace_8e04b899_4eee_4f10_b69d_0d1149a40f83_weu_externalid": {
+            "value": null
+        },
+        "serverfarms_ASP_shewritesfrontwindowsgroup_939d_externalid": {
+            "value": null
+        }
+    }
+}

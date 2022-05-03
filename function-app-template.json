@@ -1,0 +1,241 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_shewrites_js_func_app_name": {
+            "defaultValue": "shewrites-js-func-app",
+            "type": "String"
+        },
+        "serverfarms_ASP_shewrites_9543_externalid": {
+            "defaultValue": "/subscriptions/***SUB_ID***/resourceGroups/shewrites/providers/Microsoft.Web/serverfarms/ASP-shewrites-9543",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2021-03-01",
+            "name": "[parameters('sites_shewrites_js_func_app_name')]",
+            "location": "Central US",
+            "tags": {
+                "hidden-link: /app-insights-resource-id": "/subscriptions/***SUB_ID***/resourceGroups/shewrites/providers/microsoft.insights/components/shewrites-js-func-app202205021314",
+                "hidden-link: /app-insights-instrumentation-key": "***KEY***"
+            },
+            "kind": "functionapp",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[parameters('serverfarms_ASP_shewrites_9543_externalid')]",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 200,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "customDomainVerificationId": "***ID***",
+                "containerSize": 1536,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2021-03-01",
+            "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '/ftp')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_shewrites_js_func_app_name'))]"
+            ],
+            "tags": {
+                "hidden-link: /app-insights-resource-id": "/subscriptions/***SUB_ID***/resourceGroups/shewrites/providers/microsoft.insights/components/shewrites-js-func-app202205021314",
+                "hidden-link: /app-insights-instrumentation-key": "***KEY***"
+            },
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2021-03-01",
+            "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '/scm')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_shewrites_js_func_app_name'))]"
+            ],
+            "tags": {
+                "hidden-link: /app-insights-resource-id": "/subscriptions/***SUB_ID***/resourceGroups/shewrites/providers/microsoft.insights/components/shewrites-js-func-app202205021314",
+                "hidden-link: /app-insights-instrumentation-key": "***KEY***"
+            },
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2021-03-01",
+            "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '/web')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_shewrites_js_func_app_name'))]"
+            ],
+            "tags": {
+                "hidden-link: /app-insights-resource-id": "/subscriptions/***SUB_ID***/resourceGroups/shewrites/providers/microsoft.insights/components/shewrites-js-func-app202205021314",
+                "hidden-link: /app-insights-instrumentation-key": "***KEY***"
+            },
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php"
+                ],
+                "netFrameworkVersion": "v6.0",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$shewrites-js-func-app",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "cors": {
+                    "allowedOrigins": [
+                        "https://portal.azure.com"
+                    ],
+                    "supportCredentials": false
+                },
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.0",
+                "ftpsState": "AllAllowed",
+                "preWarmedInstanceCount": 0,
+                "functionAppScaleLimit": 200,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/functions",
+            "apiVersion": "2021-03-01",
+            "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '/HttpTrigger1')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_shewrites_js_func_app_name'))]"
+            ],
+            "properties": {
+                "script_root_path_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/site/wwwroot/HttpTrigger1/",
+                "script_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/site/wwwroot/HttpTrigger1/index.js",
+                "config_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/site/wwwroot/HttpTrigger1/function.json",
+                "test_data_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/data/Functions/sampledata/HttpTrigger1.dat",
+                "href": "https://shewrites-js-func-app.azurewebsites.net/admin/functions/HttpTrigger1",
+                "config": {},
+                "test_data": "{\"method\":\"post\",\"queryStringParams\":[],\"headers\":[],\"body\":\"{\\n  \\\"toto\\\" : \\\"tata\\\"\\n}\"}",
+                "invoke_url_template": "https://shewrites-js-func-app.azurewebsites.net/api/httptrigger1",
+                "language": "node",
+                "isDisabled": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/functions",
+            "apiVersion": "2021-03-01",
+            "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '/QueueTrigger1')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_shewrites_js_func_app_name'))]"
+            ],
+            "properties": {
+                "script_root_path_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/site/wwwroot/QueueTrigger1/",
+                "script_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/site/wwwroot/QueueTrigger1/index.js",
+                "config_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/site/wwwroot/QueueTrigger1/function.json",
+                "test_data_href": "https://shewrites-js-func-app.azurewebsites.net/admin/vfs/data/Functions/sampledata/QueueTrigger1.dat",
+                "href": "https://shewrites-js-func-app.azurewebsites.net/admin/functions/QueueTrigger1",
+                "config": {},
+                "test_data": "toto",
+                "language": "node",
+                "isDisabled": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2021-03-01",
+            "name": "[concat(parameters('sites_shewrites_js_func_app_name'), '/', parameters('sites_shewrites_js_func_app_name'), '.azurewebsites.net')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_shewrites_js_func_app_name'))]"
+            ],
+            "properties": {
+                "siteName": "shewrites-js-func-app",
+                "hostNameType": "Verified"
+            }
+        }
+    ]
+}
